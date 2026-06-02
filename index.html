@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presentasi Rekayasa Mutu - Kelompok 1</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Playfair Display (Elegan) & Inter (Modern/Bersih) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              navy: '#1a2b4c',
+              gold: '#cda144',
+              light: '#f8fafc',
+              muted: '#64748b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #f1f5f9;
+      background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    
+    /* Transisi Slide Elegan */
+    .slide-wrapper {
+      position: relative;
+      width: 100%;
+      min-height: 75vh;
+    }
+    
+    .slide-card {
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .slide-hidden {
+      opacity: 0;
+      transform: translateY(15px) scale(0.98);
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+    
+    .slide-active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Tabel Akademik (Borders minimal) */
+    .academic-table th {
+      border-bottom: 2px solid #1a2b4c;
+      padding-bottom: 8px;
+    }
+    .academic-table td {
+      border-bottom: 1px solid #e2e8f0;
+      padding: 12px 8px;
+    }
+
+    /* Scrollbar minimalis */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  </style>
+</head>
+<body class="text-slate-800 font-sans min-h-screen flex flex-col items-center justify-center p-4 md:p-8">
+
+  <!-- Main Presentation Container (Aspek rasio lebar/widescreen feel) -->
+  <main class="w-full max-w-5xl bg-white rounded-2xl shadow-[0_20px_50px_rgba(8,_112,_184,_0.07)] border border-slate-100 overflow-hidden flex flex-col">
+    
+    <!-- Header Tipis -->
+    <header class="px-8 py-5 border-b border-slate-100 flex justify-between items-center bg-white z-20">
+      <div class="flex items-center space-x-3">
+        <i class="fa-solid fa-anchor text-brand-gold text-lg"></i>
+        <div>
+          <h1 class="font-sans text-sm font-bold text-brand-navy tracking-wide uppercase">Rekayasa Mutu</h1>
+          <p class="text-[10px] text-brand-muted tracking-widest uppercase">Perikanan Kelautan • UNDIP</p>
+        </div>
+      </div>
+      <div class="flex items-center space-x-4">
+        <select id="slide-selector" onchange="goToSlide(parseInt(this.value))" class="text-sm border-none bg-slate-50 text-brand-navy rounded-md px-3 py-1.5 focus:ring-0 cursor-pointer font-medium hover:bg-slate-100 transition-colors">
+          <!-- Populated by JS -->
+        </select>
+      </div>
+    </header>
+
+    <div class="slide-wrapper bg-white p-8 md:p-12">
+      
+      <!-- SLIDE 1: Cover Page -->
+      <div id="slide-0" class="slide-card flex flex-col justify-center items-center text-center py-10">
+        <span class="px-4 py-1.5 rounded-full bg-brand-navy/5 text-brand-navy text-xs font-bold tracking-widest uppercase mb-8">Laporan Resmi Praktikum</span>
+        
+        <h2 class="font-serif text-4xl md:text-6xl text-brand-navy font-bold leading-tight max-w-3xl mb-6">
+          Rekayasa Mutu & Keamanan Hasil Perikanan
+        </h2>
+        
+        <p class="text-base md:text-lg text-slate-500 max-w-2xl mx-auto italic font-serif mb-12">
+          "Penerapan CPIB di TPI Juwana & Metode Pengujian Mutu Organoleptik, Colorimeter, serta pH Produk Perikanan"
+        </p>
+
+        <div class="w-24 h-1 bg-brand-gold rounded-full mb-12"></div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-3xl text-sm text-left">
+          <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
+            <p class="font-bold text-brand-navy uppercase tracking-wide mb-3 text-xs">Disusun Oleh Kelompok 1</p>
+            <ul class="space-y-2 text-slate-600">
+              <li class="flex justify-between"><span>Candra Prawiraneng G.</span> <span class="text-slate-400 font-mono text-xs">26060224140020</span></li>
+              <li class="flex justify-between"><span>Muhammad Amri K.</span> <span class="text-slate-400 font-mono text-xs">26060224140023</span></li>
+              <li class="flex justify-between"><span>Zaki Muhammad R.</span> <span class="text-slate-400 font-mono text-xs">26060224140028</span></li>
+              <li class="flex justify-between"><span>Syifa Ul A’la</span> <span class="text-slate-400 font-mono text-xs">26060224140036</span></li>
+            </ul>
+          </div>
+          <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 flex flex-col justify-center">
+            <p class="font-bold text-brand-navy uppercase tracking-wide mb-1 text-xs">Fakultas Perikanan & Ilmu Kelautan</p>
+            <p class="text-slate-600 mb-2">Universitas Diponegoro • Jepara</p>
+            <p class="text-slate-400 font-mono text-xs">Tahun Akademik Genap 2025/2026</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: Pengesahan & Teori -->
+      <div id="slide-1" class="slide-card flex flex-col">
+        <h3 class="font-serif text-3xl text-brand-navy font-bold mb-8 flex items-center">
+          Lembar Pengesahan & Teori Dasar
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-10 flex-1">
+          <!-- Lembar Pengesahan -->
+          <div class="md:col-span-5 space-y-6">
+            <div class="border-l-4 border-brand-gold pl-5 py-2">
+              <h4 class="text-sm font-bold text-brand-navy uppercase tracking-wider mb-4">Pengesahan Praktikum</h4>
+              <div class="space-y-3 text-sm text-slate-600">
+                <div class="grid grid-cols-3"><span class="text-slate-400">Mata Kuliah</span> <span class="col-span-2 font-medium text-slate-800">Rekayasa Mutu</span></div>
+                <div class="grid grid-cols-3"><span class="text-slate-400">Semester</span> <span class="col-span-2 font-medium text-slate-800">Genap 2025/2026</span></div>
+                <div class="grid grid-cols-3"><span class="text-slate-400">Asisten</span> <span class="col-span-2 font-medium text-slate-800">Nurul Hikmah <br><span class="text-xs text-slate-400 font-mono">26060121120011</span></span></div>
+                <div class="grid grid-cols-3"><span class="text-slate-400">Dosen</span> <span class="col-span-2 font-medium text-slate-800">Eko Susanto, Ph.D.</span></div>
+              </div>
+            </div>
+            <p class="text-xs text-slate-400 italic mt-6 leading-relaxed">
+              Disetujui dan dilaksanakan di TPI Juwana Unit II dan Lab. Rekayasa Mutu Hasil Perikanan UNDIP.
+            </p>
+          </div>
+
+          <!-- Teori -->
+          <div class="md:col-span-7 space-y-6">
+            <p class="text-base text-slate-700 leading-relaxed">
+              Ikan merupakan komoditas pangan yang bersifat sangat mudah membusuk (<i class="text-brand-navy">highly perishable food</i>). Rekayasa mutu mengimplementasikan sistem jaminan mutu sejak rantai pertama penangkapan di kapal hingga ke tangan konsumen.
+            </p>
+            
+            <div class="grid grid-cols-2 gap-6 mt-4">
+              <div class="bg-slate-50 p-5 rounded-xl">
+                <i class="fa-solid fa-temperature-arrow-down text-brand-gold text-2xl mb-3"></i>
+                <h5 class="font-bold text-brand-navy mb-2">Rantai Dingin</h5>
+                <p class="text-sm text-slate-600 leading-relaxed">Mempertahankan suhu pusat ikan mendekati 0°C untuk menghambat laju bakteri pembusuk.</p>
+              </div>
+              <div class="bg-slate-50 p-5 rounded-xl">
+                <i class="fa-solid fa-check-double text-brand-gold text-2xl mb-3"></i>
+                <h5 class="font-bold text-brand-navy mb-2">Prinsip 3C+Q</h5>
+                <p class="text-sm text-slate-600 leading-relaxed">Penanganan berbasis <strong>Clean, Careful, Cool, dan Quick</strong> di sepanjang alur distribusi.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: Modul I - CPIB -->
+      <div id="slide-2" class="slide-card flex flex-col">
+        <h3 class="font-serif text-3xl text-brand-navy font-bold mb-8">
+          Modul I: Penerapan CPIB di TPI Juwana
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div class="space-y-6">
+            <p class="text-base text-slate-700 leading-relaxed">
+              <strong>TPI Unit II Juwana Pati</strong> merupakan pusat pendaratan utama armada penangkap <em>purse seine</em>. Penerapan CPIB (Cara Penanganan Ikan yang Baik) sangat kritikal di sini.
+            </p>
+            
+            <div class="flex gap-4 mb-6">
+              <div class="flex-1 bg-brand-navy text-white p-5 rounded-xl text-center">
+                <span class="text-3xl font-serif text-brand-gold font-bold block mb-1">20-30</span>
+                <span class="text-[10px] uppercase tracking-wider text-slate-300">Kapal sandar / Hari</span>
+              </div>
+              <div class="flex-1 bg-brand-navy text-white p-5 rounded-xl text-center">
+                <span class="text-3xl font-serif text-brand-gold font-bold block mb-1">5-10 <span class="text-lg">Ton</span></span>
+                <span class="text-[10px] uppercase tracking-wider text-slate-300">Tangkapan / Kapal</span>
+              </div>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-brand-navy text-sm uppercase tracking-wide mb-3">Aspek Operasional Positif</h4>
+              <ul class="space-y-3 text-sm text-slate-700">
+                <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i> <span><strong>Quick Handling:</strong> Pembongkaran cepat (30-60 menit).</span></li>
+                <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i> <span><strong>Cooling Chain:</strong> Pengkondisian dingin dengan es curah (0-5°C).</span></li>
+                <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i> <span><strong>Careful Protection:</strong> Penggunaan tenda penutup dari sinar matahari.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 p-8 rounded-2xl flex flex-col justify-center border border-slate-100">
+            <h4 class="text-sm font-bold text-brand-navy uppercase tracking-widest text-center mb-8">Alur Rantai Dingin Terpasang</h4>
+            <div class="space-y-8 relative pl-4">
+              <!-- Garis penghubung -->
+              <div class="absolute left-[39px] top-6 bottom-6 w-0.5 bg-slate-200 z-0"></div>
+              
+              <div class="flex items-center space-x-6 relative z-10">
+                <div class="w-12 h-12 rounded-full bg-white border-2 border-brand-navy flex items-center justify-center text-brand-navy text-lg shadow-sm">
+                  <i class="fa-solid fa-ship"></i>
+                </div>
+                <div>
+                  <h5 class="text-sm font-bold text-brand-navy">1. Atas Kapal</h5>
+                  <p class="text-xs text-slate-500 mt-1">Freezer mempertahankan suhu ≤-18°C.</p>
+                </div>
+              </div>
+
+              <div class="flex items-center space-x-6 relative z-10">
+                <div class="w-12 h-12 rounded-full bg-brand-gold border-2 border-white flex items-center justify-center text-white text-lg shadow-md ring-4 ring-brand-gold/20">
+                  <i class="fa-solid fa-dolly"></i>
+                </div>
+                <div>
+                  <h5 class="text-sm font-bold text-brand-navy">2. Pembongkaran</h5>
+                  <p class="text-xs text-slate-500 mt-1">Ikan dibongkar ke basket bertenda pelindung.</p>
+                </div>
+              </div>
+
+              <div class="flex items-center space-x-6 relative z-10">
+                <div class="w-12 h-12 rounded-full bg-white border-2 border-brand-navy flex items-center justify-center text-brand-navy text-lg shadow-sm">
+                  <i class="fa-solid fa-truck-snowplow"></i>
+                </div>
+                <div>
+                  <h5 class="text-sm font-bold text-brand-navy">3. Transportasi</h5>
+                  <p class="text-xs text-slate-500 mt-1">Dipindah ke mobil box berinsulasi (0-5°C).</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: Temuan Deviasi CPIB -->
+      <div id="slide-3" class="slide-card flex flex-col">
+        <h3 class="font-serif text-3xl text-brand-navy font-bold mb-2">Temuan Deviasi CPIB</h3>
+        <p class="text-sm text-slate-500 mb-8">Berdasarkan Lampiran Peraturan No. 52 A/Kepmen-KP/2013</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <!-- Statistik Sederhana -->
+          <div class="col-span-1 grid grid-cols-2 gap-4">
+            <div class="bg-blue-50 p-4 rounded-xl text-center flex flex-col justify-center">
+              <span class="text-3xl font-bold text-blue-600 mb-1">11</span>
+              <span class="text-xs uppercase font-semibold text-blue-800">Minor</span>
+            </div>
+            <div class="bg-yellow-50 p-4 rounded-xl text-center flex flex-col justify-center">
+              <span class="text-3xl font-bold text-yellow-600 mb-1">8</span>
+              <span class="text-xs uppercase font-semibold text-yellow-800">Mayor</span>
+            </div>
+            <div class="bg-red-50 p-4 rounded-xl text-center flex flex-col justify-center">
+              <span class="text-3xl font-bold text-red-600 mb-1">5</span>
+              <span class="text-xs uppercase font-semibold text-red-800">Serius</span>
+            </div>
+            <div class="bg-green-50 p-4 rounded-xl text-center flex flex-col justify-center">
+              <span class="text-3xl font-bold text-green-600 mb-1">0</span>
+              <span class="text-xs uppercase font-semibold text-green-800">Kritis</span>
+            </div>
+          </div>
+          
+          <div class="col-span-2 flex items-center justify-center p-6 bg-brand-navy text-white rounded-xl">
+            <div class="text-center">
+              <p class="text-sm text-slate-300 mb-2">Kesimpulan Kelayakan Unit:</p>
+              <h4 class="text-2xl font-serif font-bold text-brand-gold tracking-wide">CUKUP DENGAN PERBAIKAN</h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1">
+          <div class="border-l-2 border-red-400 pl-4">
+            <h5 class="text-sm font-bold text-brand-navy mb-1 flex items-center">
+              <span class="w-2 h-2 rounded-full bg-red-500 mr-2"></span> Kontaminasi Peralatan <span class="ml-2 text-[10px] bg-red-100 text-red-700 px-2 py-0.5 rounded">SERIUS</span>
+            </h5>
+            <p class="text-sm text-slate-600">Pipa palka, mobil box, dan besi ganco berkarat berisiko mencemari fisik dan kimia ikan.</p>
+          </div>
+          <div class="border-l-2 border-yellow-400 pl-4">
+            <h5 class="text-sm font-bold text-brand-navy mb-1 flex items-center">
+              <span class="w-2 h-2 rounded-full bg-yellow-500 mr-2"></span> Sanitasi Pekerja <span class="ml-2 text-[10px] bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded">MAYOR</span>
+            </h5>
+            <p class="text-sm text-slate-600">Pekerja merokok, tidak memakai apron, dan fasilitas cuci tangan sangat jauh dari area bongkar.</p>
+          </div>
+          <div class="border-l-2 border-yellow-400 pl-4">
+            <h5 class="text-sm font-bold text-brand-navy mb-1 flex items-center">
+              <span class="w-2 h-2 rounded-full bg-yellow-500 mr-2"></span> Kualitas Air Pencuci <span class="ml-2 text-[10px] bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded">MAYOR</span>
+            </h5>
+            <p class="text-sm text-slate-600">Pencucian masih menggunakan air laut pelabuhan yang belum terjamin bebas patogen mikrobiologis.</p>
+          </div>
+          <div class="border-l-2 border-blue-400 pl-4">
+            <h5 class="text-sm font-bold text-brand-navy mb-1 flex items-center">
+              <span class="w-2 h-2 rounded-full bg-blue-500 mr-2"></span> Monitoring Suhu <span class="ml-2 text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded">MINOR</span>
+            </h5>
+            <p class="text-sm text-slate-600">Pencatatan suhu dilakukan manual, tidak ada alat perekam suhu otomatis (data logger).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 5: Modul VI - Uji Sensori -->
+      <div id="slide-4" class="slide-card flex flex-col">
+        <h3 class="font-serif text-3xl text-brand-navy font-bold mb-8">
+          Modul VI: Pengujian Sensori (Organoleptik)
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Uji Afektif -->
+          <div class="space-y-4">
+            <h4 class="font-bold text-brand-navy border-b border-slate-200 pb-2">A. Uji Afektif (Hedonik)</h4>
+            <p class="text-xs text-slate-500 mb-4">Tingkat kesukaan spontan panelis terhadap Bakso & Otak-otak Ikan.</p>
+            
+            <div class="space-y-3">
+              <div>
+                <div class="flex justify-between text-xs mb-1"><span class="text-slate-600">Kenampakan</span> <span class="font-bold text-brand-navy">9 (Sangat Suka)</span></div>
+                <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-green-500 h-full w-[100%] rounded-full"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs mb-1"><span class="text-slate-600">Aroma</span> <span class="font-bold text-brand-navy">8 (Suka)</span></div>
+                <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-green-400 h-full w-[88%] rounded-full"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs mb-1"><span class="text-slate-600">Rasa</span> <span class="font-bold text-brand-navy">7 (Suka)</span></div>
+                <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-brand-gold h-full w-[77%] rounded-full"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs mb-1"><span class="text-slate-600">Tekstur</span> <span class="font-bold text-brand-navy">5 (Netral)</span></div>
+                <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-slate-300 h-full w-[55%] rounded-full"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- QDA -->
+          <div class="space-y-4">
+            <h4 class="font-bold text-brand-navy border-b border-slate-200 pb-2">B. Analisis QDA</h4>
+            <p class="text-xs text-slate-500 mb-4">Penilaian terukur 5 panelis terlatih (Kepercayaan 95%).</p>
+            
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 mb-4">
+              <div class="flex justify-between items-center mb-2">
+                <span class="font-bold text-brand-navy text-sm">Bakso Ikan</span>
+                <span class="bg-green-100 text-green-700 text-[10px] px-2 py-0.5 rounded font-bold">LAYAK</span>
+              </div>
+              <div class="grid grid-cols-2 text-xs text-slate-600 gap-y-1">
+                <span>Rata-rata: <strong class="text-brand-navy">8.1</strong></span>
+                <span>Simpangan: <strong class="text-brand-navy">0.37</strong></span>
+                <span class="col-span-2 mt-1">Selang: <strong class="text-brand-gold">7.78 &lt; μ &lt; 8.42</strong></span>
+              </div>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+              <div class="flex justify-between items-center mb-2">
+                <span class="font-bold text-brand-navy text-sm">Otak-otak</span>
+                <span class="bg-green-100 text-green-700 text-[10px] px-2 py-0.5 rounded font-bold">LAYAK</span>
+              </div>
+              <div class="grid grid-cols-2 text-xs text-slate-600 gap-y-1">
+                <span>Rata-rata: <strong class="text-brand-navy">7.9</strong></span>
+                <span>Simpangan: <strong class="text-brand-navy">0.58</strong></span>
+                <span class="col-span-2 mt-1">Selang: <strong class="text-brand-gold">7.39 &lt; μ &lt; 8.41</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Uji Segitiga -->
+          <div class="space-y-4">
+            <h4 class="font-bold text-brand-navy border-b border-slate-200 pb-2">C. Uji Segitiga</h4>
+            <p class="text-xs text-slate-500 mb-4">Identifikasi 1 sampel berbeda pada produk Terasi.</p>
+            
+            <table class="w-full text-xs text-left academic-table mt-2">
+              <thead>
+                <tr>
+                  <th class="text-brand-navy">Atribut Sensori</th>
+                  <th class="text-brand-navy">Hasil vs Kontrol</th>
+                </tr>
+              </thead>
+              <tbody class="text-slate-600">
+                <tr>
+                  <td class="font-medium">Rasa & Aroma</td>
+                  <td class="text-red-600 font-semibold">Berbeda Nyata</td>
+                </tr>
+                <tr>
+                  <td class="font-medium">Kenampakan</td>
+                  <td class="text-red-600 font-semibold">Berbeda Nyata</td>
+                </tr>
+                <tr>
+                  <td class="font-medium">Tekstur</td>
+                  <td class="text-slate-500">Mirip Rujukan</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="text-[10px] text-slate-400 mt-2 italic">Ketidakmerataan fermentasi mikroba menyebabkan perbedaan profil rasa dan warna secara signifikan.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 6: Pengujian Warna -->
+      <div id="slide-5" class="slide-card flex flex-col">
+        <h3 class="font-serif text-3xl text-brand-navy font-bold mb-8">
+          Pengujian Warna Objektif (CIELAB)
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div>
+            <p class="text-sm text-slate-600 leading-relaxed mb-6">
+              Pengukuran didasarkan pada ruang warna <strong>L* a* b*</strong>. 
+              <span class="text-brand-navy font-medium">L*</span> untuk kecerahan, 
+              <span class="text-red-600 font-medium">a*</span> untuk spektrum merah/hijau, dan 
+              <span class="text-brand-gold font-medium">b*</span> untuk kuning/biru.
+            </p>
+
+            <table class="w-full text-sm text-left academic-table">
+              <thead>
+                <tr>
+                  <th class="text-brand-navy font-semibold">Sampel Kerupuk</th>
+                  <th class="text-brand-navy font-semibold text-center">L*</th>
+                  <th class="text-brand-navy font-semibold text-center">a*</th>
+                  <th class="text-brand-navy font-semibold text-center">b*</th>
+                </tr>
+              </thead>
+              <tbody class="text-slate-600">
+                <tr class="hover:bg-slate-50 cursor-pointer transition-colors" onclick="showColorDetail('udang')">
+                  <td class="font-medium text-brand-navy">Udang</td>
+                  <td class="text-center font-bold text-green-600">63.07</td>
+                  <td class="text-center">1.56</td>
+                  <td class="text-center">44.10</td>
+                </tr>
+                <tr class="hover:bg-slate-50 cursor-pointer transition-colors" onclick="showColorDetail('tenggiri')">
+                  <td class="font-medium text-brand-navy">Tenggiri</td>
+                  <td class="text-center">54.02</td>
+                  <td class="text-center">1.51</td>
+                  <td class="text-center font-bold text-brand-gold">47.57</td>
+                </tr>
+                <tr class="hover:bg-slate-50 cursor-pointer transition-colors" onclick="showColorDetail('terasi')">
+                  <td class="font-medium text-brand-navy">Terasi</td>
+                  <td class="text-center">54.02</td>
+                  <td class="text-center">1.51</td>
+                  <td class="text-center font-bold text-brand-gold">47.57</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="text-[10px] text-brand-muted mt-3 italic"><i class="fa-solid fa-hand-pointer mr-1"></i> Klik baris tabel untuk melihat visualisasi warna.</p>
+          </div>
+
+          <div class="bg-slate-50 p-8 rounded-2xl flex flex-col items-center">
+            <div id="color-box" class="w-32 h-32 rounded-full shadow-lg border-4 border-white mb-6 transition-colors duration-500" style="background-color: #E6A283;"></div>
+            <h4 id="color-label" class="font-bold text-brand-navy mb-4">Kerupuk Udang</h4>
+            
+            <div class="w-full max-w-xs space-y-3">
+              <div>
+                <div class="flex justify-between text-xs mb-1 text-slate-500"><span>Lightness (L*)</span> <span id="val-l" class="font-mono text-brand-navy font-bold">63.07</span></div>
+                <div class="w-full bg-slate-200 h-1 rounded-full"><div id="bar-l" class="bg-slate-800 h-full rounded-full transition-all duration-500" style="width: 63%;"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs mb-1 text-slate-500"><span>Redness (a*)</span> <span id="val-a" class="font-mono text-brand-navy font-bold">+1.56</span></div>
+                <div class="w-full bg-slate-200 h-1 rounded-full"><div id="bar-a" class="bg-red-500 h-full rounded-full transition-all duration-500" style="width: 55%;"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs mb-1 text-slate-500"><span>Yellowness (b*)</span> <span id="val-b" class="font-mono text-brand-navy font-bold">+44.10</span></div>
+                <div class="w-full bg-slate-200 h-1 rounded-full"><div id="bar-b" class="bg-brand-gold h-full rounded-full transition-all duration-500" style="width: 44%;"></div></div>
+              </div>
+            </div>
+
+            <p class="text-xs text-slate-500 text-center mt-6">
+              Pigmen <em class="text-red-500">astaxanthin</em> udang menghasilkan kecerahan tinggi, sedangkan reaksi <em>Maillard</em> dominan menyumbang warna kuning pada tenggiri/terasi.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 7: Pengujian pH -->
+      <div id="slide-6" class="slide-card flex flex-col">
+        <h3 class="font-serif text-3xl text-brand-navy font-bold mb-8">
+          Pengujian pH & Mikrobiologi Mutu
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center flex-1">
+          <div>
+            <p class="text-base text-slate-700 leading-relaxed mb-6">
+              Pengukuran derajat keasaman (pH) menggunakan pH meter digital bertujuan mengevaluasi stabilitas biokimia pasca pengolahan.
+            </p>
+            
+            <div class="space-y-4 mb-6">
+              <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <div>
+                  <span class="font-bold text-brand-navy block">1. Otak-otak Ikan</span>
+                  <span class="text-xs text-slate-500">Padat kompak, aroma spesifik</span>
+                </div>
+                <span class="text-lg font-serif font-bold text-brand-gold">pH 6.0</span>
+              </div>
+              <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <div>
+                  <span class="font-bold text-brand-navy block">2. Bakso Ikan</span>
+                  <span class="text-xs text-slate-500">Putih keabu-abuan, aroma ringan</span>
+                </div>
+                <span class="text-lg font-serif font-bold text-brand-gold">pH 6.0</span>
+              </div>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-lg text-sm text-slate-600 border-l-2 border-brand-navy">
+              <strong>Preparasi:</strong> 5g sampel dihomogenisasi dalam 10 mL aquadest. Pengenceran melarutkan ion hidrogen bebas sehingga menghasilkan pembacaan yang seragam.
+            </div>
+          </div>
+
+          <div class="bg-slate-50 p-8 rounded-2xl flex flex-col justify-center">
+            <h4 class="text-sm font-bold text-brand-navy uppercase tracking-widest text-center mb-8">Spektrum pH & Risiko</h4>
+            
+            <div class="relative pt-6 pb-10">
+              <div class="w-full h-3 rounded-full bg-gradient-to-r from-red-500 via-brand-gold to-blue-500 relative">
+                <!-- Marker pH 6 -->
+                <div class="absolute left-[42%] -top-2 w-1 h-7 bg-brand-navy rounded-full z-10 shadow-sm"></div>
+                <span class="absolute left-[37%] -top-8 text-xs font-bold text-brand-navy">pH 6.0</span>
+              </div>
+              <div class="flex justify-between text-xs text-slate-400 mt-3 font-mono">
+                <span>Asam (4)</span>
+                <span>Netral (7)</span>
+                <span>Basa (10)</span>
+              </div>
+            </div>
+
+            <div class="mt-2 text-sm text-slate-700 leading-relaxed text-center">
+              Nilai <strong>pH 6.0 (mendekati netral)</strong> menciptakan lingkungan yang sangat ideal bagi pertumbuhan koloni bakteri pembusuk (<em class="text-red-500">psikrofilik</em> & <em class="text-red-500">mesofilik</em>). Peran rantai dingin menjadi mutlak diperlukan.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 8: Kesimpulan & Saran -->
+      <div id="slide-7" class="slide-card flex flex-col">
+        <h3 class="font-serif text-3xl text-brand-navy font-bold mb-8">
+          Kesimpulan dan Saran
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 flex-1">
+          <!-- Kesimpulan -->
+          <div>
+            <h4 class="font-bold text-brand-navy uppercase tracking-wide mb-4 flex items-center text-sm border-b border-slate-100 pb-2">
+              Kesimpulan Utama
+            </h4>
+            <ul class="space-y-5 text-sm text-slate-700">
+              <li class="flex items-start">
+                <span class="text-brand-gold font-bold mr-3">01.</span>
+                <p>TPI Juwana menerapkan rantai dingin yang baik, namun higienitas personal pekerja dan kelayakan alat (karat) masih menjadi temuan deviasi serius.</p>
+              </li>
+              <li class="flex items-start">
+                <span class="text-brand-gold font-bold mr-3">02.</span>
+                <p>Mutu sensori bakso (8.1) dan otak-otak (7.9) sangat layak dikonsumsi. Kenampakan disukai, namun tekstur dinilai netral akibat adonan sedikit berpasir.</p>
+              </li>
+              <li class="flex items-start">
+                <span class="text-brand-gold font-bold mr-3">03.</span>
+                <p>Kecerahan kerupuk udang paling tinggi dipengaruhi pigmen astaxanthin alami. Sementara pH olahan stabil di angka 6.0.</p>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Saran -->
+          <div>
+            <h4 class="font-bold text-brand-navy uppercase tracking-wide mb-4 flex items-center text-sm border-b border-slate-100 pb-2">
+              Rekomendasi Perbaikan
+            </h4>
+            <ul class="space-y-5 text-sm text-slate-700">
+              <li class="flex items-start">
+                <span class="text-brand-navy font-bold mr-3"><i class="fa-solid fa-arrow-right"></i></span>
+                <p><strong>Fasilitas:</strong> Penggantian berkala pada keranjang basket dan bagian palka/mobil yang berkarat untuk menghindari cemaran logam berat.</p>
+              </li>
+              <li class="flex items-start">
+                <span class="text-brand-navy font-bold mr-3"><i class="fa-solid fa-arrow-right"></i></span>
+                <p><strong>Monitoring:</strong> Pemasangan alat perekam suhu otomatis (data logger) pada cold storage agar fluktuasi terpantau 24 jam.</p>
+              </li>
+              <li class="flex items-start">
+                <span class="text-brand-navy font-bold mr-3"><i class="fa-solid fa-arrow-right"></i></span>
+                <p><strong>Sanitasi:</strong> Penggunaan air tawar bersih bersanitasi klinis untuk pencucian, menggantikan air laut pelabuhan yang rentan patogen.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 9: Daftar Pustaka -->
+      <div id="slide-8" class="slide-card flex flex-col">
+        <h3 class="font-serif text-3xl text-brand-navy font-bold mb-8">
+          Daftar Referensi Utama
+        </h3>
+
+        <div class="space-y-6 text-sm text-slate-600 font-serif leading-relaxed flex-1">
+          <div class="pl-6 -indent-6">
+            Agustini, T. W., Darmanto, U. Amalia & L. Rianingsih. 2021. <span class="italic text-slate-500">"Quality of Fish Balls Made from Different Types of Fish During Cold Storage."</span> IOP Conference Series: Earth and Environmental Science.
+          </div>
+          <div class="pl-6 -indent-6">
+            Wijaya, H., Dien, H. A., Tumbol, R. A., & Mentang, F. 2024. <span class="italic text-slate-500">"Good fish handling techniques to maintain the quality of catch from ship to consumer."</span> Jurnal Biologi dan Pembelajarannya.
+          </div>
+          <div class="pl-6 -indent-6">
+            Hidayat, R., W. Kusuma., & P. Lestari. 2021. <span class="italic text-slate-500">"Evaluasi Sanitasi dan Higiene pada Kapal Perikanan Tangkap."</span> Jurnal Teknologi Perikanan dan Kelautan.
+          </div>
+          <div class="pl-6 -indent-6">
+            Suryono, C., L. Rianingsih & P. H. Riyadi. 2018. <span class="italic text-slate-500">"Analisis Profil Sensori Ikan Manyung (Arius thalassinus) Asap dengan Metode QDA."</span> Jurnal Pengolahan Hasil Perikanan Indonesia.
+          </div>
+        </div>
+
+        <div class="text-center mt-10 pt-10 border-t border-slate-100">
+          <h4 class="font-serif text-2xl text-brand-navy font-bold mb-2">Terima Kasih</h4>
+          <p class="text-sm text-slate-500 font-sans">Sesi Diskusi dan Tanya Jawab Dipersilakan.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer / Navigasi Minimalis -->
+    <footer class="px-8 py-4 bg-slate-50 border-t border-slate-100 flex justify-between items-center z-20 mt-auto">
+      <div class="text-sm text-slate-500 font-medium">
+        <span id="current-slide-num" class="text-brand-navy font-bold">1</span> / <span id="total-slides-num">9</span>
+      </div>
+      
+      <div class="flex items-center space-x-2">
+        <button onclick="prevSlide()" class="p-2 w-10 h-10 rounded-full hover:bg-slate-200 text-brand-navy transition-colors flex items-center justify-center" title="Sebelumnya">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        
+        <button id="autoplay-btn" onclick="toggleAutoplay()" class="p-2 w-10 h-10 rounded-full hover:bg-slate-200 text-slate-400 transition-colors flex items-center justify-center" title="Putar Otomatis">
+          <i class="fa-solid fa-play"></i>
+        </button>
+
+        <button onclick="nextSlide()" class="p-2 w-10 h-10 rounded-full bg-brand-navy hover:bg-slate-800 text-white transition-colors flex items-center justify-center shadow-md" title="Berikutnya">
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    const slidesData = [
+      { id: "slide-0", title: "1. Cover Judul" },
+      { id: "slide-1", title: "2. Pengesahan & Teori" },
+      { id: "slide-2", title: "3. Penerapan CPIB" },
+      { id: "slide-3", title: "4. Temuan Deviasi" },
+      { id: "slide-4", title: "5. Uji Sensori" },
+      { id: "slide-5", title: "6. Uji Warna" },
+      { id: "slide-6", title: "7. Uji pH" },
+      { id: "slide-7", title: "8. Kesimpulan" },
+      { id: "slide-8", title: "9. Referensi" }
+    ];
+
+    let currentSlide = 0;
+    let autoplayInterval = null;
+
+    window.onload = function() {
+      const selector = document.getElementById("slide-selector");
+      slidesData.forEach((slide, idx) => {
+        let opt = document.createElement("option");
+        opt.value = idx;
+        opt.innerText = slide.title;
+        selector.appendChild(opt);
+      });
+      
+      document.getElementById("total-slides-num").innerText = slidesData.length;
+      updateSlides();
+
+      // Keyboard Controls (Kiri Kanan)
+      document.addEventListener("keydown", function(e) {
+        if (e.key === "ArrowRight") nextSlide();
+        else if (e.key === "ArrowLeft") prevSlide();
+      });
+    };
+
+    function updateSlides() {
+      slidesData.forEach((slide, idx) => {
+        const el = document.getElementById(slide.id);
+        if (!el) return;
+
+        if (idx === currentSlide) {
+          el.classList.remove("slide-hidden");
+          el.classList.add("slide-active");
+        } else {
+          el.classList.remove("slide-active");
+          el.classList.add("slide-hidden");
+        }
+      });
+
+      document.getElementById("current-slide-num").innerText = currentSlide + 1;
+      document.getElementById("slide-selector").value = currentSlide;
+    }
+
+    function goToSlide(index) {
+      if (index >= 0 && index < slidesData.length) {
+        currentSlide = index;
+        updateSlides();
+      }
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide < slidesData.length - 1) ? currentSlide + 1 : 0;
+      updateSlides();
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlides();
+      }
+    }
+
+    function toggleAutoplay() {
+      const btn = document.getElementById("autoplay-btn");
+      if (autoplayInterval) {
+        clearInterval(autoplayInterval);
+        autoplayInterval = null;
+        btn.innerHTML = '<i class="fa-solid fa-play"></i>';
+        btn.classList.remove("text-brand-gold");
+        btn.classList.add("text-slate-400");
+      } else {
+        autoplayInterval = setInterval(nextSlide, 7000); // 7 detik per slide
+        btn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+        btn.classList.remove("text-slate-400");
+        btn.classList.add("text-brand-gold");
+      }
+    }
+
+    // Interaktif visualisasi warna
+    function showColorDetail(type) {
+      const box = document.getElementById("color-box");
+      const label = document.getElementById("color-label");
+      const valL = document.getElementById("val-l"), barL = document.getElementById("bar-l");
+      const valA = document.getElementById("val-a"), barA = document.getElementById("bar-a");
+      const valB = document.getElementById("val-b"), barB = document.getElementById("bar-b");
+
+      if (type === 'udang') {
+        box.style.backgroundColor = "#E6A283"; 
+        label.innerText = "Kerupuk Udang";
+        valL.innerText = "63.07"; barL.style.width = "63%";
+        valA.innerText = "+1.56"; barA.style.width = "55%";
+        valB.innerText = "+44.10"; barB.style.width = "44%";
+      } else if (type === 'tenggiri') {
+        box.style.backgroundColor = "#D5C19C";
+        label.innerText = "Kerupuk Tenggiri";
+        valL.innerText = "54.02"; barL.style.width = "54%";
+        valA.innerText = "+1.51"; barA.style.width = "52%";
+        valB.innerText = "+47.57"; barB.style.width = "48%";
+      } else if (type === 'terasi') {
+        box.style.backgroundColor = "#BCA57A";
+        label.innerText = "Kerupuk Terasi";
+        valL.innerText = "54.02"; barL.style.width = "54%";
+        valA.innerText = "+1.51"; barA.style.width = "52%";
+        valB.innerText = "+47.57"; barB.style.width = "48%";
+      }
+    }
+  </script>
+</body>
+</html>
